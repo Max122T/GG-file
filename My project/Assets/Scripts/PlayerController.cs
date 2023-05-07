@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
+{ 
     public float speed = 7f;
 
     public float jumpPower = 200f;
@@ -11,6 +11,13 @@ public class PlayerController : MonoBehaviour
     public bool ground;
 
     public Rigidbody rb;
+
+    private Animator anim;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     void Update()
     {
         GetInput();
@@ -21,6 +28,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             transform.localPosition += transform.forward * speed * Time.deltaTime;
+            anim.SetBool("isRunning", true);
+        }
+        if(Input.GetKeyUp(KeyCode.W))
+        {
+            anim.SetBool("isRunning", false);
         }
 
         if (Input.GetKey(KeyCode.S))
