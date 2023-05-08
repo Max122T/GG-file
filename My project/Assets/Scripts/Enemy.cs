@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     NavMeshAgent myAgent;
+    private AudioSource _source;
     Animator myAnim;
     float distance;
     public Transform target;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     {
         myAgent = GetComponent<NavMeshAgent>();
         myAnim = GetComponent<Animator>();
+        _source = GetComponent<AudioSource>();
     }
 
     
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour
             myAnim.SetBool("Idle", false);
             myAnim.SetBool("Run",true);
             myAnim.SetBool("Attack", false);
+            _source.Play();
         }
 
         if (distance <= 4.5f)
@@ -43,6 +46,7 @@ public class Enemy : MonoBehaviour
             myAnim.SetBool("Idle", false);
             myAnim.SetBool("Run", false);
             myAnim.SetBool("Attack", true);
+            _source.Play();
         }
     }
 }
